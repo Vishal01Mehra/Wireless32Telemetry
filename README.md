@@ -24,8 +24,6 @@ Wireless32Telemetry for ESP32 is a telemetry/low data rate only solution. There 
 
 Tested with: DOIT ESP32 module
 
-![DroneBridge for ESP32 block diagram blackbox](wiki/DroneBridgeForESP32Blackbox.png)
-
 Blackbox concept. UDP & TCP connections possible. Automatic UDP uni-cast of messages to port 14550 to all 
 connected devices/stations. Allows additional clients to register for UDP. Client must send a packet with length > 0 to UDP port of ESP32.
 
