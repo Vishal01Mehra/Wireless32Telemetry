@@ -22,8 +22,6 @@ Wireless32Telemetry for ESP32 is a telemetry/low data rate only solution. There 
 -   Reliable, low latency, light weight
 -   Upload mission etc.
 
-![ESP32 module with VCP](https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/ESP32_Espressif_ESP-WROOM-32_Dev_Board.jpg/313px-ESP32_Espressif_ESP-WROOM-32_Dev_Board.jpg)
-
 Tested with: DOIT ESP32 module
 
 ![DroneBridge for ESP32 block diagram blackbox](wiki/DroneBridgeForESP32Blackbox.png)
