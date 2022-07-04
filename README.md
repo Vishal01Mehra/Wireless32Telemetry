@@ -1,22 +1,20 @@
-![DroneBridge logo](wiki/DroneBridgeLogo_text.png)
 
-# DroneBridge for ESP32
-DroneBridge enabled firmware for the popular ESP32 modules from Espressif Systems. Probably the cheapest way to
+
+# Wireless32Telemetry
+Wireless32Telemetry enabled firmware for the popular ESP32 modules from Espressif Systems. Probably the cheapest way to
 communicate with your drone, UAV, UAS, ground based vehicle or whatever you may call them.
 
 Also allows for a fully transparent serial to wifi pass through with variable packet size
 (Continuous stream of data required).
 
-DroneBridge for ESP32 is a telemetry/low data rate only solution. There is no support for cameras connected to the ESP32 since it does not support video encoding.
-
-![DroneBridge for ESP32 concept](wiki/db_ESP32_setup.png)
+Wireless32Telemetry for ESP32 is a telemetry/low data rate only solution. There is no support for cameras connected to the ESP32 since it does not support video encoding.
 
 ## Features
 -   Bi-directional link: MAVLink, MSP & LTM
 -   Affordable: ~7€
 -   Up to 150m range
 -   Weight: <10 g
--   Supported by: DroneBridge for Android (app), mwptools, QGroundControl, impload etc.
+-   Supported by: mwptools, QGroundControl, impload etc.
 -   Easy to set up: Power connection + UART connection to flight controller
 -   Fully configurable through easy to use web interface
 -   Parsing of LTM & MSPv2 for more reliable connection and less packet loss
@@ -36,7 +34,6 @@ connected devices/stations. Allows additional clients to register for UDP. Clien
 ## Installation/Flashing using precompiled binaries
 
 First download the latest release from this repository.
-[You can find them here](https://github.com/DroneBridge/ESP32/releases).
 
 For flashing there are many ways of doing this. To easy ones are shown below.
 
@@ -57,21 +54,6 @@ For flashing there are many ways of doing this. To easy ones are shown below.
 
 [Look here for more detailed information](https://github.com/espressif/esptool)
 
-#### Windows only: Use flash download tools
-
-1. [Get it here](https://www.espressif.com/en/support/download/other-tools?5)
-2. Erase the flash of the ESP32 befor flashing a new release\
-   ![ESP32 erase flash with flash download tools](wiki/ESP32Flasher_Erase.PNG)
-3. Select the firmware, bootloader & partition table and set everything as below
-   ```shell
-    0x8000 partition_table/partition-table.bin
-    0x1000 bootloader/bootloader.bin
-    0x10000 db_esp32.bin
-    0x110000 www.bin
-   ```
-   ![ESP download tool configuration](wiki/ESP32Flasher.png)
-3.  Hit Start and power cycle your ESP32 after flashing
-
 ### Wiring
 
 1.  Connect UART of ESP32 to a 3.3V UART of your flight controller.
@@ -83,12 +65,10 @@ take more than 3.3V/5V on VIN PIN**
 Defaults: UART2 (RX2, TX2 on GPIO 16, 17)
 
 ### Configuration
-1.  Connect to the wifi `DroneBridge ESP32` with password `dronebridge`
-2.  In your browser type: `dronebridge.local` (Chrome: `http://dronebridge.local`) or `192.168.2.1` into the address bar.
+1.  Connect to the wifi `MASCon xxx` with password `mascon@1234`
+2.  In your browser type: (Chrome: `192.168.2.1` into the address bar.
  **You might need to disable the cellular connection to force the browser to use the wifi connection**
 3.  Configure as you please and hit `save`
-
-![DroneBridge for ESP32 web interface](wiki/dbesp32_webinterface.png)
 
 **Configuration Options:**
 -   `Wifi SSID`: Up to 31 character long
@@ -102,8 +82,7 @@ Defaults: UART2 (RX2, TX2 on GPIO 16, 17)
 
 Most options require a restart/reset of ESP32 module
 
-## Use with DroneBridge for Android or QGroundControl
-![DroneBridge for Android app screenshot](wiki/dp_app-map-2017-10-29-kleiner.png)
+## Use with QGroundControl or MissionPlanner 
 
 -   Use the Android app to display live telemetry data. Mission planning capabilities for MAVLink will follow.
 -   The ESP will auto broadcast messages to all connected devices via UDP to port 14550. QGroundControl should auto connect
@@ -118,47 +97,6 @@ Most options require a restart/reset of ESP32 module
  **This project uses the v4.3 branch of ESP-IDF**
 
  Compile and flash by running: `idf.py build`, `idf.py flash`
-
- ### API
-The webinterface communicates with a REST:API on the ESP32. You can use that API to set configurations not slectable 
-via the web-interface (e.g. baud rate). It also allows you to easily integrate DroneBridge for ESP32.
-
-
-**To request the settings**
-```http request
-http://dronebridge.local/api/settings/request
-```
-
-**To request stats**
-```http request
-http://dronebridge.local/api/system/stats
-```
-
-**Trigger a reboot**
-```http request
-http://dronebridge.local/api/system/reboot
-```
-
-**Trigger a settings change:** Send a valid JSON
-```json
-{
-  "wifi_ssid": "DroneBridge ESP32",
-  "wifi_pass": "dronebridge",
-  "ap_channel": 6,
-  "tx_pin": 17,
-  "rx_pin": 16,
-  "telem_proto": 4,
-  "baud": 115200,
-  "msp_ltm_port": 0,
-  "ltm_pp": 2,
-  "trans_pack_size": 64,
-  "ap_ip": "192.168.2.1"
-}
-```
-to
-```http request
-http://dronebridge.local/api/settings/change
-```
 
  ### Testing
  To test the frontend without the ESP32 run 
