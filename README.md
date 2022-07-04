@@ -11,7 +11,6 @@ Wireless32Telemetry for ESP32 is a telemetry/low data rate only solution. There 
 
 ## Features
 -   Bi-directional link: MAVLink, MSP & LTM
--   Affordable: ~7€
 -   Up to 150m range
 -   Weight: <10 g
 -   Supported by: mwptools, QGroundControl, impload etc.
